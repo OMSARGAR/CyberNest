@@ -835,7 +835,7 @@
         /* Team Section */
         .team-member {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.5s ease;
@@ -970,6 +970,8 @@
             transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
             transform-style: preserve-3d;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         [data-theme="light"] .about-card {
@@ -1190,6 +1192,7 @@
 
         .about-content-wrapper .about-card {
             flex: 1;
+            margin-bottom: 1.5rem;
         }
 
         /* Footer newsletter visibility fix */
@@ -1208,6 +1211,165 @@
             border: 1px solid rgba(0, 0, 0, 0.2);
             color: var(--text-primary);
         }
+
+        /* Download ISO Card Styles */
+        .iso-card {
+            background-color: var(--dark-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            transform: translateY(20px);
+            opacity: 0;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .iso-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .iso-card.animate-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .iso-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 194, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .iso-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+        }
+
+        .iso-card:hover .iso-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* Enhanced Visual Elements */
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 194, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, 30px); }
+        }
+
+        .holographic-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holographic-effect::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 194, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: hologram 3s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes hologram {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 5px rgba(0, 194, 255, 0.5); }
+            to { box-shadow: 0 0 20px rgba(0, 194, 255, 0.8), 0 0 30px rgba(155, 92, 255, 0.6); }
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.03;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        .gradient-border > div {
+            background: var(--dark-light);
+            border-radius: 13px;
+            padding: 1.5rem;
+        }
+
+        /* NEW: Fixes for About section alignment and spacing */
+        .about-section .row {
+            align-items: stretch;
+        }
+
+        .about-content-wrapper .about-card:last-child,
+        .team-container .about-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .key-facts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .key-fact-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .key-fact-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100">
@@ -1215,6 +1377,9 @@
     <div id="preloader">
         <div class="loader"></div>
     </div>
+
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -1353,18 +1518,19 @@
     <section id="home" class="page-section hero">
         <div class="particles" id="particles-js"></div>
         <div class="grid-bg"></div>
+        <div class="cyber-grid"></div>
         <div class="container hero-content">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="mb-4"><span id="typewriter-text"></span></h1>
                     <p>CyberNest provides instant access to virtual machines with any operating system, directly in your browser. No downloads, no setup, just click and run.</p>
                     <div class="d-flex flex-wrap gap-3 hero-buttons">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Get Started Free</button>
+                        <button class="btn btn-primary pulse-glow" data-bs-toggle="modal" data-bs-target="#signupModal">Get Started Free</button>
                         <a href="#features" class="btn btn-outline-primary">Learn More</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="vm-screen floating">
+                    <div class="vm-screen floating holographic-effect">
                         <div class="text-center" id="vm-preview">
                             <i class="bi bi-laptop display-1 text-muted"></i>
                             <p class="text-muted">Virtual Machine Preview</p>
@@ -1385,59 +1551,71 @@
             <h2 class="section-title text-center" data-aos="fade-up">Why Choose CyberNest?</h2>
             <div class="row mt-5">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-lightning-charge"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+                            <h3>Instant Access</h3>
+                            <p>Launch virtual machines in seconds with our optimized cloud infrastructure. No waiting, no delays.</p>
                         </div>
-                        <h3>Instant Access</h3>
-                        <p>Launch virtual machines in seconds with our optimized cloud infrastructure. No waiting, no delays.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-shield-check"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <h3>Secure & Isolated</h3>
+                            <p>Each VM runs in a completely isolated environment with enterprise-grade security measures.</p>
                         </div>
-                        <h3>Secure & Isolated</h3>
-                        <p>Each VM runs in a completely isolated environment with enterprise-grade security measures.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-cpu"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-cpu"></i>
+                            </div>
+                            <h3>Powerful Performance</h3>
+                            <p>High-performance virtual machines with dedicated resources for smooth operation.</p>
                         </div>
-                        <h3>Powerful Performance</h3>
-                        <p>High-performance virtual machines with dedicated resources for smooth operation.</p>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-globe"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-globe"></i>
+                            </div>
+                            <h3>Global Access</h3>
+                            <p>Access your virtual machines from anywhere in the world with our global infrastructure.</p>
                         </div>
-                        <h3>Global Access</h3>
-                        <p>Access your virtual machines from anywhere in the world with our global infrastructure.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-arrow-repeat"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h3>Auto Scaling</h3>
+                            <p>Automatically scale your resources up or down based on your needs and usage patterns.</p>
                         </div>
-                        <h3>Auto Scaling</h3>
-                        <p>Automatically scale your resources up or down based on your needs and usage patterns.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
-                    <div class="feature-card card-3d">
-                        <div class="feature-icon">
-                            <i class="bi bi-graph-up"></i>
+                    <div class="feature-card card-3d gradient-border">
+                        <div>
+                            <div class="feature-icon">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h3>Real-time Analytics</h3>
+                            <p>Monitor your virtual machines with detailed analytics and performance metrics.</p>
                         </div>
-                        <h3>Real-time Analytics</h3>
-                        <p>Monitor your virtual machines with detailed analytics and performance metrics.</p>
                     </div>
                 </div>
             </div>
@@ -1450,31 +1628,39 @@
             <h2 class="section-title" data-aos="fade-up">Dashboard</h2>
             <div class="row mb-4">
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stats-card card-3d">
-                        <h3>Active VMs</h3>
-                        <div class="stats-number counter" data-count="3">0</div>
-                        <p>Running instances</p>
+                    <div class="stats-card card-3d gradient-border">
+                        <div>
+                            <h3>Active VMs</h3>
+                            <div class="stats-number counter" data-count="3">0</div>
+                            <p>Running instances</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stats-card card-3d">
-                        <h3>Storage Used</h3>
-                        <div class="stats-number counter" data-count="42">0%</div>
-                        <p>56 GB / 128 GB</p>
+                    <div class="stats-card card-3d gradient-border">
+                        <div>
+                            <h3>Storage Used</h3>
+                            <div class="stats-number counter" data-count="42">0%</div>
+                            <p>56 GB / 128 GB</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stats-card card-3d">
-                        <h3>CPU Usage</h3>
-                        <div class="stats-number counter" data-count="18">0%</div>
-                        <p>Average load</p>
+                    <div class="stats-card card-3d gradient-border">
+                        <div>
+                            <h3>CPU Usage</h3>
+                            <div class="stats-number counter" data-count="18">0%</div>
+                            <p>Average load</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stats-card card-3d">
-                        <h3>Network</h3>
-                        <div class="stats-number counter" data-count="124">0 MB</div>
-                        <p>Data transferred today</p>
+                    <div class="stats-card card-3d gradient-border">
+                        <div>
+                            <h3>Network</h3>
+                            <div class="stats-number counter" data-count="124">0 MB</div>
+                            <p>Data transferred today</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1482,7 +1668,7 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Quick Access OS Templates</h3>
             <div class="row">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-windows display-4 text-primary mb-3 floating"></i>
                             <h5>Windows 11</h5>
@@ -1492,7 +1678,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-ubuntu display-4 text-warning mb-3 floating"></i>
                             <h5>Ubuntu 22.04</h5>
@@ -1502,7 +1688,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-apple display-4 text-secondary mb-3 floating"></i>
                             <h5>macOS Monterey</h5>
@@ -1587,7 +1773,7 @@
                     <button class="btn btn-outline-primary" id="restartBtn"><i class="bi bi-arrow-clockwise"></i> Restart</button>
                 </div>
             </div>
-            <div class="vm-screen mb-4" data-aos="zoom-in" id="vmDisplay">
+            <div class="vm-screen mb-4 holographic-effect" data-aos="zoom-in" id="vmDisplay">
                 <div class="text-center text-muted py-5" id="vmContent">
                     <i class="bi bi-laptop display-1"></i>
                     <p>Virtual Machine Screen - Windows 11 Desktop</p>
@@ -1596,7 +1782,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6" data-aos="fade-right">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-header">
                             <h5>VM Information</h5>
                         </div>
@@ -1631,7 +1817,7 @@
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-header">
                             <h5>Quick Actions</h5>
                         </div>
@@ -1658,7 +1844,7 @@
             
             <div class="row mb-4">
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon">
@@ -1672,7 +1858,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
@@ -1686,7 +1872,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
@@ -1700,7 +1886,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FFD93D, #FF9C3D);">
@@ -1718,7 +1904,7 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Development Tools</h3>
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #6A11CB, #2575FC);">
@@ -1732,7 +1918,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #11998E, #38EF7D);">
@@ -1746,7 +1932,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FC466B, #3F5EFB);">
@@ -1760,7 +1946,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="app-card card-3d">
+                    <div class="app-card card-3d gradient-border">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FD1D1D, #FCB045);">
@@ -1777,51 +1963,60 @@
 
             <!-- Download ISO Section -->
             <h3 class="mt-5 mb-4" data-aos="fade-up">Download ISO</h3>
-            <div class="row" data-aos="fade-up">
-                <div class="col-12">
-                    <div class="card card-3d">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="iso-card card-3d gradient-border">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 iso-category">
-                                    <h5><i class="bi bi-windows text-primary me-2"></i> Windows Distributions</h5>
-                                    <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 11 (Latest)</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 10 (22H2)</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows Server 2022</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 8.1</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 7 (Legacy)</a></li>
-                                    </ul>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="iso-icon">
+                                    <i class="bi bi-windows text-white"></i>
                                 </div>
-                                <div class="col-md-6 iso-category">
-                                    <h5><i class="bi bi-ubuntu text-warning me-2"></i> Linux Distributions</h5>
-                                    <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Ubuntu 22.04 LTS</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Debian 11</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> CentOS Stream</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Fedora 37</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Kali Linux</a></li>
-                                    </ul>
-                                </div>
+                                <h5 class="mb-0">Windows</h5>
                             </div>
-                            <div class="row mt-4">
-                                <div class="col-md-6 iso-category">
-                                    <h5><i class="bi bi-apple text-secondary me-2"></i> macOS</h5>
-                                    <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Monterey</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Big Sur</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Catalina</a></li>
-                                    </ul>
+                            <p class="text-muted small">Official Windows distributions for virtual machines.</p>
+                            <button class="btn btn-outline-primary btn-sm w-100 view-iso" data-category="windows">View All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="iso-card card-3d gradient-border">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="iso-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
+                                    <i class="bi bi-ubuntu text-white"></i>
                                 </div>
-                                <div class="col-md-6 iso-category">
-                                    <h5><i class="bi bi-phone text-success me-2"></i> Android & Others</h5>
-                                    <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Android x86</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> FreeBSD</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> OpenBSD</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Chrome OS</a></li>
-                                    </ul>
-                                </div>
+                                <h5 class="mb-0">Linux</h5>
                             </div>
+                            <p class="text-muted small">Popular Linux distributions for development.</p>
+                            <button class="btn btn-outline-primary btn-sm w-100 view-iso" data-category="linux">View All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="iso-card card-3d gradient-border">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="iso-icon" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                                    <i class="bi bi-apple text-white"></i>
+                                </div>
+                                <h5 class="mb-0">macOS</h5>
+                            </div>
+                            <p class="text-muted small">Apple's operating systems for creative work.</p>
+                            <button class="btn btn-outline-primary btn-sm w-100 view-iso" data-category="macos">View All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="iso-card card-3d gradient-border">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="iso-icon" style="background: linear-gradient(135deg, #FFD93D, #FF9C3D);">
+                                    <i class="bi bi-phone text-white"></i>
+                                </div>
+                                <h5 class="mb-0">Android & Others</h5>
+                            </div>
+                            <p class="text-muted small">Mobile and alternative operating systems.</p>
+                            <button class="btn btn-outline-primary btn-sm w-100 view-iso" data-category="android">View All</button>
                         </div>
                     </div>
                 </div>
@@ -1837,7 +2032,7 @@
             
             <div class="row">
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body">
                             <h4><i class="bi bi-play-circle text-primary me-2"></i> Getting Started</h4>
                             <p class="text-muted">New to CyberNest? Follow our step-by-step guide to launch your first VM.</p>
@@ -1851,7 +2046,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body">
                             <h4><i class="bi bi-book text-primary me-2"></i> User Guide</h4>
                             <p class="text-muted">Detailed documentation on all CyberNest features and capabilities.</p>
@@ -1865,7 +2060,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body">
                             <h4><i class="bi bi-patch-question text-primary me-2"></i> FAQ & Support</h4>
                             <p class="text-muted">Find answers to common questions and get help when you need it.</p>
@@ -1883,7 +2078,7 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Video Tutorials</h3>
             <div class="row">
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>Getting Started with CyberNest</h5>
@@ -1893,7 +2088,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>Advanced VM Configuration</h5>
@@ -1903,7 +2098,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card card-3d">
+                    <div class="card card-3d gradient-border">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>App Installation & Management</h5>
@@ -1919,101 +2114,148 @@
     <!-- About & Privacy/Terms -->
     <section id="about" class="page-section about-section">
         <div class="about-bg"></div>
+        <div class="cyber-grid"></div>
         <div class="container">
             <h2 class="section-title glow-text" data-aos="fade-up">About CyberNest</h2>
             <div class="row align-items-stretch">
                 <div class="col-lg-8" data-aos="fade-right">
                     <div class="about-content-wrapper">
-                        <div class="about-card mb-4">
-                            <h4 class="glow-text">Our Mission</h4>
-                            <p>CyberNest was founded with a simple but powerful vision: to make virtual computing accessible to everyone, everywhere. We believe that the ability to run any operating system, on any device, without complex setup or expensive hardware, should be available to students, developers, and professionals alike.</p>
-                            
-                            <h4 class="mt-4 glow-text">What We Do</h4>
-                            <p>CyberNest provides a cloud-based platform that allows users to instantly launch and access virtual machines with a wide variety of operating systems, directly in their web browsers. Our technology eliminates the need for local virtualization software, complex configurations, or powerful hardware.</p>
-                            
-                            <h4 class="mt-4 glow-text">Our Technology</h4>
-                            <p>Built on a foundation of cutting-edge virtualization technology, CyberNest leverages containerization and advanced streaming protocols to deliver a seamless desktop experience. Our infrastructure is distributed across multiple global regions to ensure low latency and high availability.</p>
+                        <div class="about-card mb-4 gradient-border">
+                            <div class="about-card-content">
+                                <h4 class="glow-text">Our Mission</h4>
+                                <p>CyberNest was founded with a simple but powerful vision: to make virtual computing accessible to everyone, everywhere. We believe that the ability to run any operating system, on any device, without complex setup or expensive hardware, should be available to students, developers, and professionals alike.</p>
+                                
+                                <h4 class="mt-4 glow-text">What We Do</h4>
+                                <p>CyberNest provides a cloud-based platform that allows users to instantly launch and access virtual machines with a wide variety of operating systems, directly in their web browsers. Our technology eliminates the need for local virtualization software, complex configurations, or powerful hardware.</p>
+                                
+                                <h4 class="mt-4 glow-text">Our Technology</h4>
+                                <p>Built on a foundation of cutting-edge virtualization technology, CyberNest leverages containerization and advanced streaming protocols to deliver a seamless desktop experience. Our infrastructure is distributed across multiple global regions to ensure low latency and high availability.</p>
+                            </div>
                         </div>
                         
-                        <div class="about-card mb-4">
-                            <h4 class="glow-text">Privacy Policy</h4>
-                            <p>At CyberNest, we take your privacy seriously. We collect only the information necessary to provide and improve our services. We do not sell your personal data to third parties. Your virtual machines and data are encrypted and isolated from other users.</p>
-                            <ul>
-                                <li>We collect account information (name, email) to manage your subscription and provide support.</li>
-                                <li>Usage data helps us improve performance and user experience.</li>
-                                <li>Virtual machine data is encrypted at rest and in transit.</li>
-                                <li>You can request deletion of your data at any time.</li>
-                            </ul>
+                        <div class="about-card mb-4 gradient-border">
+                            <div class="about-card-content">
+                                <h4 class="glow-text">Privacy Policy</h4>
+                                <p>At CyberNest, we take your privacy seriously. We collect only the information necessary to provide and improve our services. We do not sell your personal data to third parties. Your virtual machines and data are encrypted and isolated from other users.</p>
+                                
+                                <h5 class="mt-4">Information We Collect</h5>
+                                <ul>
+                                    <li>Account information (name, email) to manage your subscription and provide support</li>
+                                    <li>Usage data to improve performance and user experience</li>
+                                    <li>Virtual machine configuration and performance metrics</li>
+                                    <li>Billing information for paid subscriptions</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">How We Use Your Information</h5>
+                                <ul>
+                                    <li>To provide and maintain our services</li>
+                                    <li>To notify you about changes to our services</li>
+                                    <li>To provide customer support</li>
+                                    <li>To gather analysis or valuable information to improve our services</li>
+                                    <li>To monitor the usage of our services</li>
+                                    <li>To detect, prevent and address technical issues</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">Data Security</h5>
+                                <p>We implement appropriate technical and organizational security measures to protect your personal data against accidental or unlawful destruction, loss, alteration, unauthorized disclosure, or access.</p>
+                                
+                                <h5 class="mt-4">Your Rights</h5>
+                                <p>You have the right to access, correct, or delete your personal data. You can also object to the processing of your personal data, ask us to restrict processing of your personal data, or request portability of your personal data.</p>
+                            </div>
                         </div>
                         
-                        <div class="about-card">
-                            <h4 class="glow-text">Terms of Service</h4>
-                            <p>By using CyberNest, you agree to our Terms of Service, which include:</p>
-                            <ul>
-                                <li>Acceptable use policies prohibiting illegal activities</li>
-                                <li>Resource usage limits based on your subscription plan</li>
-                                <li>Intellectual property rights and content ownership</li>
-                                <li>Service availability and uptime guarantees</li>
-                                <li>Billing, cancellation, and refund policies</li>
-                            </ul>
+                        <div class="about-card gradient-border">
+                            <div class="about-card-content">
+                                <h4 class="glow-text">Terms of Service</h4>
+                                <p>By using CyberNest, you agree to our Terms of Service, which include:</p>
+                                
+                                <h5 class="mt-4">Acceptable Use</h5>
+                                <p>You agree not to use the Service to:</p>
+                                <ul>
+                                    <li>Violate any applicable laws or regulations</li>
+                                    <li>Infringe upon the intellectual property rights of others</li>
+                                    <li>Harass, abuse, or harm another person</li>
+                                    <li>Upload or transmit viruses or any other type of malicious code</li>
+                                    <li>Interfere with or disrupt the integrity or performance of the Service</li>
+                                    <li>Attempt to gain unauthorized access to the Service or its related systems</li>
+                                </ul>
+                                
+                                <h5 class="mt-4">Account Responsibilities</h5>
+                                <p>You are responsible for safeguarding the password that you use to access the Service and for any activities or actions under your password. We encourage you to use "strong" passwords with your account.</p>
+                                
+                                <h5 class="mt-4">Intellectual Property</h5>
+                                <p>The Service and its original content, features, and functionality are and will remain the exclusive property of CyberNest and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
+                                
+                                <h5 class="mt-4">Termination</h5>
+                                <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms. Upon termination, your right to use the Service will immediately cease.</p>
+     
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-left">
                     <div class="team-container h-100">
-                        <div class="about-card mb-4">
-                            <h4 class="glow-text">Key Facts</h4>
-                            <div class="mb-4">
-                                <h5>Founded</h5>
-                                <p>2025</p>
-                            </div>
-                            <div class="mb-4">
-                                <h5>Headquarters</h5>
-                                <p>Sangola</p>
-                            </div>
-                            <div class="mb-4">
-                                <h5>Users</h5>
-                                <p>5000+</p>
-                            </div>
-                            <div class="mb-4">
-                                <h5>Virtual Machines</h5>
-                                <p>6000+ launched</p>
-                            </div>
-                            <div class="mb-4">
-                                <h5>Available OS</h5>
-                                <p>85+ operating systems</p>
+                        <div class="about-card mb-4 gradient-border">
+                            <div class="about-card-content">
+                                <h4 class="glow-text">Key Facts</h4>
+                                <div class="key-facts-grid">
+                                    <div class="key-fact-item">
+                                        <h5>Founded</h5>
+                                        <p>2025</p>
+                                    </div>
+                                    <div class="key-fact-item">
+                                        <h5>Headquarters</h5>
+                                        <p>Sangola</p>
+                                    </div>
+                                    <div class="key-fact-item">
+                                        <h5>Users</h5>
+                                        <p>5000+</p>
+                                    </div>
+                                    <div class="key-fact-item">
+                                        <h5>Virtual Machines</h5>
+                                        <p>6000+ launched</p>
+                                    </div>
+                                    <div class="key-fact-item">
+                                        <h5>Available OS</h5>
+                                        <p>85+ operating systems</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="about-card">
-                            <h4 class="glow-text">Team</h4>
-                            <div class="team-member">
-                                <div class="member-avatar float-animation">
-                                    <span>GG</span>
+                        <div class="about-card gradient-border">
+                            <div class="about-card-content">
+                                <h4 class="glow-text">Team</h4>
+                                <div class="team-grid">
+                                    <div class="team-member">
+                                        <div class="member-avatar float-animation">
+                                            <span>GG</span>
+                                        </div>
+                                        <h5>Gajanan Gavhane</h5>
+                                        <p class="text-muted">Frontend Developer</p>
+                                    </div>
+                                    <div class="team-member">
+                                        <div class="member-avatar float-animation">
+                                            <span>TJ</span>
+                                        </div>
+                                        <h5>Tryambak Jadhav</h5>
+                                        <p class="text-muted">Backend Developer</p>
+                                    </div>
+                                    <div class="team-member">
+                                        <div class="member-avatar float-animation">
+                                            <span>YB</span>
+                                        </div>
+                                        <h5>Yash Botre</h5>
+                                        <p class="text-muted">UI/UX Designer</p>
+                                    </div>
+                                    <div class="team-member">
+                                        <div class="member-avatar float-animation">
+                                            <span>VG</span>
+                                        </div>
+                                        <h5>Viraj Gaikwad</h5>
+                                        <p class="text-muted">System Tester</p>
+                                    </div>
                                 </div>
-                                <h5>Gajanan Gavhane</h5>
-                                <p class="text-muted">CEO & Founder</p>
-                            </div>
-                            <div class="team-member">
-                                <div class="member-avatar float-animation">
-                                    <span>TJ</span>
-                                </div>
-                                <h5>Tryambak Jadhav</h5>
-                                <p class="text-muted">CTO</p>
-                            </div>
-                            <div class="team-member">
-                                <div class="member-avatar float-animation">
-                                    <span>YB</span>
-                                </div>
-                                <h5>Yash Botre</h5>
-                                <p class="text-muted">Lead Developer</p>
-                            </div>
-                            <div class="team-member">
-                                <div class="member-avatar float-animation">
-                                    <span>VG</span>
-                                </div>
-                                <h5>Viraj Gaikwad</h5>
-                                <p class="text-muted">UI/UX Designer</p>
                             </div>
                         </div>
                     </div>
@@ -2102,6 +2344,26 @@
         </div>
     </div>
 
+    <!-- ISO Download Modal -->
+    <div class="modal fade" id="isoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="isoModalTitle">Download ISO</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="isoModalContent">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS JS for scroll animations -->
@@ -2127,6 +2389,56 @@
                     }, 500);
                 }, 1500);
             });
+
+            // Create matrix background effect
+            function createMatrixBackground() {
+                const canvas = document.createElement('canvas');
+                canvas.className = 'matrix-bg';
+                canvas.id = 'matrixBg';
+                document.body.prepend(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                
+                const characters = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const charArray = characters.split('');
+                const fontSize = 14;
+                const columns = canvas.width / fontSize;
+                const drops = [];
+                
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+                
+                function draw() {
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.fillStyle = '#0F0';
+                    ctx.font = fontSize + 'px monospace';
+                    
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = charArray[Math.floor(Math.random() * charArray.length)];
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                        
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        
+                        drops[i]++;
+                    }
+                }
+                
+                setInterval(draw, 33);
+                
+                window.addEventListener('resize', function() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                });
+            }
+            
+            createMatrixBackground();
 
             // Theme management
             const themeToggle = document.getElementById('themeToggle');
@@ -2217,7 +2529,7 @@
             
             // Animate cards on scroll
             function animateCards() {
-                const cards = document.querySelectorAll('.card, .feature-card, .stats-card, .app-card');
+                const cards = document.querySelectorAll('.card, .feature-card, .stats-card, .app-card, .iso-card');
                 
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -2767,6 +3079,84 @@
                     powerOffBtn.disabled = false;
                     restartBtn.disabled = false;
                 }, 3000);
+            });
+            
+            // ISO Download Modal
+            const viewIsoButtons = document.querySelectorAll('.view-iso');
+            const isoModal = new bootstrap.Modal(document.getElementById('isoModal'));
+            const isoModalTitle = document.getElementById('isoModalTitle');
+            const isoModalContent = document.getElementById('isoModalContent');
+            
+            viewIsoButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    let title = '';
+                    let content = '';
+                    
+                    switch(category) {
+                        case 'windows':
+                            title = 'Windows Distributions';
+                            content = `
+                                <div class="iso-category">
+                                    <h5><i class="bi bi-windows text-primary me-2"></i> Windows Distributions</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 11 (Latest)</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 10 (22H2)</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows Server 2022</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 8.1</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 7 (Legacy)</a></li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                        case 'linux':
+                            title = 'Linux Distributions';
+                            content = `
+                                <div class="iso-category">
+                                    <h5><i class="bi bi-ubuntu text-warning me-2"></i> Linux Distributions</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Ubuntu 22.04 LTS</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Debian 11</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> CentOS Stream</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Fedora 37</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Kali Linux</a></li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                        case 'macos':
+                            title = 'macOS';
+                            content = `
+                                <div class="iso-category">
+                                    <h5><i class="bi bi-apple text-secondary me-2"></i> macOS</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Monterey</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Big Sur</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Catalina</a></li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                        case 'android':
+                            title = 'Android & Others';
+                            content = `
+                                <div class="iso-category">
+                                    <h5><i class="bi bi-phone text-success me-2"></i> Android & Others</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Android x86</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> FreeBSD</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> OpenBSD</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Chrome OS</a></li>
+                                    </ul>
+                                </div>
+                            `;
+                            break;
+                    }
+                    
+                    isoModalTitle.textContent = title;
+                    isoModalContent.innerHTML = content;
+                    isoModal.show();
+                });
             });
             
             // 3D card effects on mouse move
