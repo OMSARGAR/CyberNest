@@ -13,7 +13,8 @@
     <!-- AOS CSS for scroll animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        :root {
+        /* All existing CSS remains the same, except for the following additions/fixes */
+         :root {
             --primary: #00C2FF;
             --secondary: #9B5CFF;
             --dark: #121212;
@@ -1370,6 +1371,58 @@
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
+        /* Fix for About section - Key Facts alignment */
+        .key-facts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            height: 100%;
+        }
+        
+        .key-fact-item {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .key-fact-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            flex-grow: 1;
+        }
+        
+        /* Fix for Why Choose CyberNest section - feature cards */
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .feature-card > div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Fix for App Store section - Development Tools */
+        .app-card .card-body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .app-card .card-body p {
+            flex-grow: 1;
+        }
+        
+        /* Fix for Node.js and Python boxes specifically */
+        .app-card:nth-child(1) .card-body,
+        .app-card:nth-child(2) .card-body {
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100">
@@ -2201,6 +2254,7 @@
                                 <div class="key-facts-grid">
                                     <div class="key-fact-item">
                                         <h5>Founded</h5>
+                                        
                                         <p>2025</p>
                                     </div>
                                     <div class="key-fact-item">
@@ -2213,7 +2267,7 @@
                                     </div>
                                     <div class="key-fact-item">
                                         <h5>Virtual Machines</h5>
-                                        <p>6000+ launched</p>
+                                        <p>60+ launched</p>
                                     </div>
                                     <div class="key-fact-item">
                                         <h5>Available OS</h5>
@@ -3100,11 +3154,11 @@
                                 <div class="iso-category">
                                     <h5><i class="bi bi-windows text-primary me-2"></i> Windows Distributions</h5>
                                     <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 11 (Latest)</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 10 (22H2)</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows Server 2022</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 8.1</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Windows 7 (Legacy)</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Windows 11 (Latest)</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Windows 10 (22H2)</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Windows Server 2022</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Windows 8.1</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Windows 7 (Legacy)</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -3115,11 +3169,11 @@
                                 <div class="iso-category">
                                     <h5><i class="bi bi-ubuntu text-warning me-2"></i> Linux Distributions</h5>
                                     <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Ubuntu 22.04 LTS</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Debian 11</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> CentOS Stream</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Fedora 37</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Kali Linux</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Ubuntu 22.04 LTS</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Debian 11</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> CentOS Stream</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Fedora 37</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Kali Linux</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -3130,9 +3184,9 @@
                                 <div class="iso-category">
                                     <h5><i class="bi bi-apple text-secondary me-2"></i> macOS</h5>
                                     <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Monterey</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Big Sur</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> macOS Catalina</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> macOS Monterey</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> macOS Big Sur</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> macOS Catalina</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -3143,10 +3197,10 @@
                                 <div class="iso-category">
                                     <h5><i class="bi bi-phone text-success me-2"></i> Android & Others</h5>
                                     <ul class="iso-list">
-                                        <li><a href="#"><i class="bi bi-download"></i> Android x86</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> FreeBSD</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> OpenBSD</a></li>
-                                        <li><a href="#"><i class="bi bi-download"></i> Chrome OS</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Android x86</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> FreeBSD</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> OpenBSD</a></li>
+                                        <li><a href="#" class="download-iso-link"><i class="bi bi-download"></i> Chrome OS</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -3155,6 +3209,17 @@
                     
                     isoModalTitle.textContent = title;
                     isoModalContent.innerHTML = content;
+                    
+                    // Add event listeners to download links
+                    const downloadLinks = isoModalContent.querySelectorAll('.download-iso-link');
+                    downloadLinks.forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const osName = this.textContent.trim();
+                            showToast(`Download started for ${osName}!`, 'info');
+                        });
+                    });
+                    
                     isoModal.show();
                 });
             });
