@@ -20,6 +20,8 @@
             --dark-light: #1E1E1E;
             --light: #f8f9fa;
             --gray: #6c757d;
+            --text-primary: #f8f9fa;
+            --text-secondary: #e9ecef;
         }
 
         [data-theme="light"] {
@@ -27,19 +29,21 @@
             --dark-light: #e9ecef;
             --light: #121212;
             --gray: #495057;
+            --text-primary: #121212;
+            --text-secondary: #343a40;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark);
-            color: var(--light);
+            color: var(--text-primary);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
@@ -96,6 +100,11 @@
             transition: all 0.3s ease;
         }
 
+        [data-theme="light"] .navbar {
+            background-color: rgba(248, 249, 250, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         .navbar.scrolled {
             padding: 0.5rem 0;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
@@ -112,7 +121,7 @@
         }
 
         .nav-link {
-            color: var(--light) !important;
+            color: var(--text-primary) !important;
             font-weight: 500;
             margin: 0 0.5rem;
             position: relative;
@@ -160,6 +169,7 @@
             margin-bottom: 2rem;
             position: relative;
             display: inline-block;
+            color: var(--text-primary);
         }
 
         .section-title::after {
@@ -189,6 +199,11 @@
             margin-bottom: 1.5rem;
             transform: translateY(20px);
             opacity: 0;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .card.animate-in {
@@ -206,10 +221,17 @@
             background-color: rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1rem 1.5rem;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .card-header {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .card-body {
             padding: 1.5rem;
+            color: var(--text-primary);
         }
 
         /* Button Styles */
@@ -222,11 +244,13 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            color: white;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 194, 255, 0.4);
+            color: white;
         }
 
         .btn-primary::before {
@@ -316,6 +340,11 @@
             overflow: hidden;
         }
 
+        [data-theme="light"] .hero {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(233, 236, 239, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+        }
+
         .hero::before {
             content: '';
             position: absolute;
@@ -346,7 +375,7 @@
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             animation: fadeInUp 1s ease-out 0.3s both;
         }
 
@@ -418,6 +447,11 @@
             height: 100%;
             transform: translateY(20px);
             opacity: 0;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .feature-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .feature-card.animate-in {
@@ -455,6 +489,11 @@
             transition: all 0.3s ease;
             transform: translateY(20px);
             opacity: 0;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .stats-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .stats-card.animate-in {
@@ -486,6 +525,11 @@
             height: 100%;
             transform: translateY(20px);
             opacity: 0;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .app-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .app-card.animate-in {
@@ -542,12 +586,16 @@
         /* Modal Styles */
         .modal-content {
             background-color: var(--dark-light);
-            color: var(--light);
+            color: var(--text-primary);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             transform: scale(0.9);
             opacity: 0;
             transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] .modal-content {
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .modal.show .modal-content {
@@ -557,14 +605,27 @@
 
         .modal-header {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .modal-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .modal-footer {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        [data-theme="light"] .modal-footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
         .btn-close {
             filter: invert(1);
+        }
+
+        [data-theme="light"] .btn-close {
+            filter: invert(0);
         }
 
         /* Toast Styles */
@@ -582,6 +643,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            color: var(--text-primary);
         }
 
         .toast.show {
@@ -592,7 +654,7 @@
         .theme-toggle {
             background: none;
             border: none;
-            color: var(--light);
+            color: var(--text-primary);
             font-size: 1.5rem;
             cursor: pointer;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -608,10 +670,15 @@
             background-color: var(--dark-light);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 3rem 0 1.5rem;
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         footer a {
-            color: var(--light);
+            color: var(--text-primary);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -627,6 +694,10 @@
                 padding: 1rem;
                 border-radius: 10px;
                 margin-top: 1rem;
+            }
+
+            [data-theme="light"] .navbar-collapse {
+                background-color: var(--dark-light);
             }
 
             .vm-screen {
@@ -645,6 +716,10 @@
 
         ::-webkit-scrollbar-track {
             background: var(--dark);
+        }
+
+        [data-theme="light"] ::-webkit-scrollbar-track {
+            background: var(--dark-light);
         }
 
         ::-webkit-scrollbar-thumb {
@@ -702,6 +777,10 @@
             overflow: hidden;
         }
 
+        [data-theme="light"] .progress {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
         .progress-bar {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             border-radius: 10px;
@@ -729,18 +808,28 @@
         .form-control {
             background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--light);
+            color: var(--text-primary);
             border-radius: 10px;
             padding: 0.75rem 1rem;
             transition: all 0.3s ease;
         }
 
+        [data-theme="light"] .form-control {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
+        }
+
         .form-control:focus {
             background-color: rgba(255, 255, 255, 0.1);
             border-color: var(--primary);
-            color: var(--light);
+            color: var(--text-primary);
             box-shadow: 0 0 0 0.25rem rgba(0, 194, 255, 0.25);
             transform: scale(1.02);
+        }
+
+        [data-theme="light"] .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         /* Team Section */
@@ -804,6 +893,320 @@
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: var(--primary) }
+        }
+
+        /* OS Boot Animation */
+        .boot-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+        }
+
+        .boot-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .boot-progress {
+            width: 300px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .boot-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            animation: bootProgress 5s forwards;
+        }
+
+        @keyframes bootProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* About Section Enhancements */
+        .about-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 194, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(155, 92, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, var(--dark-light), rgba(0, 194, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transform-style: preserve-3d;
+            height: 100%;
+        }
+
+        [data-theme="light"] .about-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .about-card:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 194, 255, 0.2);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 194, 255, 0.5);
+        }
+
+        /* 3D Effects */
+        .card-3d {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.5s ease;
+        }
+
+        .card-3d:hover {
+            transform: perspective(1000px) rotateY(10deg) rotateX(5deg) translateY(-5px);
+        }
+
+        /* 4D-style effects */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+            opacity: 0.05;
+            transform: translateZ(-1px) scale(2);
+            z-index: -1;
+        }
+
+        /* Premium Typography */
+        .display-1 {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .display-2 {
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .lead {
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Grid Background Effect */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 194, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 194, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        /* Fixes for text visibility in App Store and Development Tools sections */
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Fix for footer input field */
+        .newsletter-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        [data-theme="light"] .newsletter-input {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
+        }
+
+        /* Fix for form fields in login/signup modals */
+        .form-control::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* Fix for VM Information section in light mode */
+        .list-group-item {
+            background-color: transparent;
+            color: var(--text-primary);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] .list-group-item {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* OS Configuration Modal Styles */
+        .config-step {
+            display: none;
+        }
+
+        .config-step.active {
+            display: block;
+        }
+
+        /* Fullscreen OS View */
+        .os-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9998;
+            display: none;
+        }
+
+        .os-header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .os-content {
+            height: calc(100% - 50px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* VM Power Controls */
+        .vm-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Team section alignment fix */
+        .team-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* ISO Download Styles */
+        .iso-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .iso-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .iso-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .iso-list li:last-child {
+            border-bottom: none;
+        }
+
+        .iso-list a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .iso-list a:hover {
+            color: var(--primary);
+        }
+
+        .iso-list a i {
+            margin-right: 0.5rem;
+        }
+
+        /* About section height alignment */
+        .about-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .about-content-wrapper .about-card {
+            flex: 1;
+        }
+
+        /* Footer newsletter visibility fix */
+        .footer-newsletter .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        .footer-newsletter .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="light"] .footer-newsletter .form-control {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: var(--text-primary);
         }
     </style>
 </head>
@@ -949,10 +1352,11 @@
     <!-- Home / Landing -->
     <section id="home" class="page-section hero">
         <div class="particles" id="particles-js"></div>
+        <div class="grid-bg"></div>
         <div class="container hero-content">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="typewriter">Run Any OS, Anywhere — Instantly in Your Browser</h1>
+                    <h1 class="mb-4"><span id="typewriter-text"></span></h1>
                     <p>CyberNest provides instant access to virtual machines with any operating system, directly in your browser. No downloads, no setup, just click and run.</p>
                     <div class="d-flex flex-wrap gap-3 hero-buttons">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">Get Started Free</button>
@@ -961,9 +1365,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="vm-screen floating">
-                        <div class="text-center text-muted">
-                            <i class="bi bi-laptop display-1"></i>
-                            <p>Virtual Machine Preview</p>
+                        <div class="text-center" id="vm-preview">
+                            <i class="bi bi-laptop display-1 text-muted"></i>
+                            <p class="text-muted">Virtual Machine Preview</p>
+                            <p class="small text-muted">Select an OS to preview</p>
                         </div>
                     </div>
                 </div>
@@ -980,7 +1385,7 @@
             <h2 class="section-title text-center" data-aos="fade-up">Why Choose CyberNest?</h2>
             <div class="row mt-5">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-lightning-charge"></i>
                         </div>
@@ -989,7 +1394,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-shield-check"></i>
                         </div>
@@ -998,7 +1403,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-cpu"></i>
                         </div>
@@ -1009,7 +1414,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-globe"></i>
                         </div>
@@ -1018,7 +1423,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-arrow-repeat"></i>
                         </div>
@@ -1027,7 +1432,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="600">
-                    <div class="feature-card">
+                    <div class="feature-card card-3d">
                         <div class="feature-icon">
                             <i class="bi bi-graph-up"></i>
                         </div>
@@ -1045,28 +1450,28 @@
             <h2 class="section-title" data-aos="fade-up">Dashboard</h2>
             <div class="row mb-4">
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stats-card">
+                    <div class="stats-card card-3d">
                         <h3>Active VMs</h3>
                         <div class="stats-number counter" data-count="3">0</div>
                         <p>Running instances</p>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stats-card">
+                    <div class="stats-card card-3d">
                         <h3>Storage Used</h3>
                         <div class="stats-number counter" data-count="42">0%</div>
                         <p>56 GB / 128 GB</p>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stats-card">
+                    <div class="stats-card card-3d">
                         <h3>CPU Usage</h3>
                         <div class="stats-number counter" data-count="18">0%</div>
                         <p>Average load</p>
                     </div>
                 </div>
                 <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stats-card">
+                    <div class="stats-card card-3d">
                         <h3>Network</h3>
                         <div class="stats-number counter" data-count="124">0 MB</div>
                         <p>Data transferred today</p>
@@ -1077,32 +1482,32 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Quick Access OS Templates</h3>
             <div class="row">
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-windows display-4 text-primary mb-3 floating"></i>
                             <h5>Windows 11</h5>
                             <p class="text-muted">Latest Microsoft OS with premium features</p>
-                            <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#launchModal">Launch</button>
+                            <button class="btn btn-outline-primary mt-2 launch-os" data-os="windows11" data-os-name="Windows 11">Launch</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-ubuntu display-4 text-warning mb-3 floating"></i>
                             <h5>Ubuntu 22.04</h5>
                             <p class="text-muted">Popular Linux distribution for development</p>
-                            <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#launchModal">Launch</button>
+                            <button class="btn btn-outline-primary mt-2 launch-os" data-os="ubuntu" data-os-name="Ubuntu 22.04">Launch</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-apple display-4 text-secondary mb-3 floating"></i>
                             <h5>macOS Monterey</h5>
                             <p class="text-muted">Apple's latest OS for creative work</p>
-                            <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#launchModal">Launch</button>
+                            <button class="btn btn-outline-primary mt-2 launch-os" data-os="macos" data-os-name="macOS Monterey">Launch</button>
                         </div>
                     </div>
                 </div>
@@ -1110,79 +1515,63 @@
         </div>
     </section>
 
-    <!-- VM Launch Modal -->
-    <div class="modal fade" id="launchModal" tabindex="-1" aria-hidden="true">
+    <!-- OS Configuration Modal -->
+    <div class="modal fade" id="osConfigModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Launch New Virtual Machine</h5>
+                    <h5 class="modal-title" id="osConfigTitle">Configure Virtual Machine</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="vmLaunchForm">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <div class="mb-3">
-                                    <label for="vmName" class="form-label">Virtual Machine Name</label>
-                                    <input type="text" class="form-control" id="vmName" placeholder="My Development VM" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="osSelect" class="form-label">Operating System</label>
-                                    <select class="form-select" id="osSelect" required>
-                                        <option value="" selected disabled>Select an OS</option>
-                                        <option value="windows11">Windows 11</option>
-                                        <option value="ubuntu">Ubuntu 22.04 LTS</option>
-                                        <option value="macos">macOS Monterey</option>
-                                        <option value="debian">Debian 11</option>
-                                        <option value="centos">CentOS Stream</option>
-                                        <option value="kali">Kali Linux</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="vmSize" class="form-label">VM Size</label>
-                                    <select class="form-select" id="vmSize" required>
-                                        <option value="small">Small (1 vCPU, 2GB RAM)</option>
-                                        <option value="medium" selected>Medium (2 vCPU, 4GB RAM)</option>
-                                        <option value="large">Large (4 vCPU, 8GB RAM)</option>
-                                        <option value="xlarge">Extra Large (8 vCPU, 16GB RAM)</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="storageSize" class="form-label">Storage Size (GB)</label>
-                                    <input type="range" class="form-range" id="storageSize" min="20" max="500" value="50">
-                                    <div class="d-flex justify-content-between">
-                                        <span>20 GB</span>
-                                        <span id="storageValue">50 GB</span>
-                                        <span>500 GB</span>
-                                    </div>
-                                </div>
+                    <form id="osConfigForm">
+                        <div class="config-step active" id="step1">
+                            <div class="mb-3">
+                                <label for="vmName" class="form-label">Virtual Machine Name</label>
+                                <input type="text" class="form-control" id="vmName" placeholder="My Development VM" required>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6>Launch Summary</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div id="launchSummary">
-                                            <p class="text-muted small">Configure your VM to see details</p>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="mb-3">
+                                <label for="ramSize" class="form-label">RAM Size</label>
+                                <select class="form-select" id="ramSize" required>
+                                    <option value="2">2 GB</option>
+                                    <option value="4" selected>4 GB</option>
+                                    <option value="8">8 GB</option>
+                                    <option value="16">16 GB</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="storageSize" class="form-label">Storage Size</label>
+                                <select class="form-select" id="storageSize" required>
+                                    <option value="50">50 GB</option>
+                                    <option value="100" selected>100 GB</option>
+                                    <option value="200">200 GB</option>
+                                    <option value="500">500 GB</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cpuCores" class="form-label">CPU Cores</label>
+                                <select class="form-select" id="cpuCores" required>
+                                    <option value="1">1 Core</option>
+                                    <option value="2" selected>2 Cores</option>
+                                    <option value="4">4 Cores</option>
+                                    <option value="8">8 Cores</option>
+                                </select>
                             </div>
                         </div>
-                        <div id="launchProgress" class="mt-4" style="display: none;">
-                            <h5>Launching VM...</h5>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        <div class="config-step" id="step2">
+                            <h5>Launching Virtual Machine</h5>
+                            <div class="progress mt-4">
+                                <div class="progress-bar" role="progressbar" style="width: 0%" id="launchProgressBar"></div>
                             </div>
-                            <div class="loader mt-3"></div>
-                            <p class="text-center mt-2" id="progressText">Initializing...</p>
+                            <div class="mt-3">
+                                <p id="launchStatus">Initializing Virtual Machine...</p>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" form="vmLaunchForm" class="btn btn-primary" id="launchVMButton">Launch Virtual Machine</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelConfig">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="nextStep">Launch Virtual Machine</button>
                 </div>
             </div>
         </div>
@@ -1192,14 +1581,14 @@
     <section id="vm-view" class="page-section">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title mb-0" data-aos="fade-right">Windows 11 - Development VM</h2>
-                <div data-aos="fade-left">
-                    <button class="btn btn-outline-primary me-2"><i class="bi bi-power"></i> Power Off</button>
-                    <button class="btn btn-outline-primary"><i class="bi bi-arrow-clockwise"></i> Restart</button>
+                <h2 class="section-title mb-0" data-aos="fade-right" id="vm-title">Windows 11 - Development VM</h2>
+                <div data-aos="fade-left" class="vm-controls">
+                    <button class="btn btn-outline-primary me-2" id="powerOffBtn"><i class="bi bi-power"></i> Power Off</button>
+                    <button class="btn btn-outline-primary" id="restartBtn"><i class="bi bi-arrow-clockwise"></i> Restart</button>
                 </div>
             </div>
-            <div class="vm-screen mb-4" data-aos="zoom-in">
-                <div class="text-center text-muted py-5">
+            <div class="vm-screen mb-4" data-aos="zoom-in" id="vmDisplay">
+                <div class="text-center text-muted py-5" id="vmContent">
                     <i class="bi bi-laptop display-1"></i>
                     <p>Virtual Machine Screen - Windows 11 Desktop</p>
                     <p class="small">VM is running with 2 vCPUs and 4GB RAM</p>
@@ -1207,42 +1596,42 @@
             </div>
             <div class="row">
                 <div class="col-md-6" data-aos="fade-right">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-header">
                             <h5>VM Information</h5>
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>Status</span>
-                                    <span class="badge bg-success">Running</span>
+                                    <span class="badge bg-success" id="vmStatus">Running</span>
                                 </li>
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>OS</span>
-                                    <span>Windows 11</span>
+                                    <span id="vmOS">Windows 11</span>
                                 </li>
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>vCPUs</span>
-                                    <span>2</span>
+                                    <span id="vmCPUs">2</span>
                                 </li>
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>RAM</span>
-                                    <span>4 GB</span>
+                                    <span id="vmRAM">4 GB</span>
                                 </li>
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>Storage</span>
-                                    <span>50 GB</span>
+                                    <span id="vmStorage">50 GB</span>
                                 </li>
-                                <li class="list-group-item bg-transparent text-light border-secondary d-flex justify-content-between">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <span>Uptime</span>
-                                    <span>2 hours, 15 minutes</span>
+                                    <span id="vmUptime">2 hours, 15 minutes</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-left">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-header">
                             <h5>Quick Actions</h5>
                         </div>
@@ -1269,7 +1658,7 @@
             
             <div class="row mb-4">
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon">
@@ -1283,7 +1672,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E53);">
@@ -1297,7 +1686,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
@@ -1311,7 +1700,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FFD93D, #FF9C3D);">
@@ -1329,7 +1718,7 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Development Tools</h3>
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #6A11CB, #2575FC);">
@@ -1343,7 +1732,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #11998E, #38EF7D);">
@@ -1357,7 +1746,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FC466B, #3F5EFB);">
@@ -1371,7 +1760,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="app-card">
+                    <div class="app-card card-3d">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-3">
                                 <div class="app-icon" style="background: linear-gradient(135deg, #FD1D1D, #FCB045);">
@@ -1381,6 +1770,58 @@
                             </div>
                             <p class="text-muted small">Platform for developing, shipping, and running applications.</p>
                             <button class="btn btn-outline-primary btn-sm w-100 install-app" data-app="Docker">Install</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Download ISO Section -->
+            <h3 class="mt-5 mb-4" data-aos="fade-up">Download ISO</h3>
+            <div class="row" data-aos="fade-up">
+                <div class="col-12">
+                    <div class="card card-3d">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 iso-category">
+                                    <h5><i class="bi bi-windows text-primary me-2"></i> Windows Distributions</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 11 (Latest)</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 10 (22H2)</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows Server 2022</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 8.1</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Windows 7 (Legacy)</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 iso-category">
+                                    <h5><i class="bi bi-ubuntu text-warning me-2"></i> Linux Distributions</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Ubuntu 22.04 LTS</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Debian 11</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> CentOS Stream</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Fedora 37</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Kali Linux</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6 iso-category">
+                                    <h5><i class="bi bi-apple text-secondary me-2"></i> macOS</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Monterey</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Big Sur</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> macOS Catalina</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 iso-category">
+                                    <h5><i class="bi bi-phone text-success me-2"></i> Android & Others</h5>
+                                    <ul class="iso-list">
+                                        <li><a href="#"><i class="bi bi-download"></i> Android x86</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> FreeBSD</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> OpenBSD</a></li>
+                                        <li><a href="#"><i class="bi bi-download"></i> Chrome OS</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1396,7 +1837,7 @@
             
             <div class="row">
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body">
                             <h4><i class="bi bi-play-circle text-primary me-2"></i> Getting Started</h4>
                             <p class="text-muted">New to CyberNest? Follow our step-by-step guide to launch your first VM.</p>
@@ -1410,7 +1851,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body">
                             <h4><i class="bi bi-book text-primary me-2"></i> User Guide</h4>
                             <p class="text-muted">Detailed documentation on all CyberNest features and capabilities.</p>
@@ -1424,7 +1865,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body">
                             <h4><i class="bi bi-patch-question text-primary me-2"></i> FAQ & Support</h4>
                             <p class="text-muted">Find answers to common questions and get help when you need it.</p>
@@ -1442,7 +1883,7 @@
             <h3 class="mt-5 mb-4" data-aos="fade-up">Video Tutorials</h3>
             <div class="row">
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>Getting Started with CyberNest</h5>
@@ -1452,7 +1893,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>Advanced VM Configuration</h5>
@@ -1462,7 +1903,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card">
+                    <div class="card card-3d">
                         <div class="card-body text-center">
                             <i class="bi bi-play-btn display-4 text-primary mb-3"></i>
                             <h5>App Installation & Management</h5>
@@ -1476,23 +1917,26 @@
     </section>
 
     <!-- About & Privacy/Terms -->
-    <section id="about" class="page-section">
+    <section id="about" class="page-section about-section">
+        <div class="about-bg"></div>
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">About CyberNest</h2>
-            <div class="row">
+            <h2 class="section-title glow-text" data-aos="fade-up">About CyberNest</h2>
+            <div class="row align-items-stretch">
                 <div class="col-lg-8" data-aos="fade-right">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4>Our Mission</h4>
+                    <div class="about-content-wrapper">
+                        <div class="about-card mb-4">
+                            <h4 class="glow-text">Our Mission</h4>
                             <p>CyberNest was founded with a simple but powerful vision: to make virtual computing accessible to everyone, everywhere. We believe that the ability to run any operating system, on any device, without complex setup or expensive hardware, should be available to students, developers, and professionals alike.</p>
                             
-                            <h4 class="mt-4">What We Do</h4>
+                            <h4 class="mt-4 glow-text">What We Do</h4>
                             <p>CyberNest provides a cloud-based platform that allows users to instantly launch and access virtual machines with a wide variety of operating systems, directly in their web browsers. Our technology eliminates the need for local virtualization software, complex configurations, or powerful hardware.</p>
                             
-                            <h4 class="mt-4">Our Technology</h4>
+                            <h4 class="mt-4 glow-text">Our Technology</h4>
                             <p>Built on a foundation of cutting-edge virtualization technology, CyberNest leverages containerization and advanced streaming protocols to deliver a seamless desktop experience. Our infrastructure is distributed across multiple global regions to ensure low latency and high availability.</p>
-                            
-                            <h4 class="mt-4">Privacy Policy</h4>
+                        </div>
+                        
+                        <div class="about-card mb-4">
+                            <h4 class="glow-text">Privacy Policy</h4>
                             <p>At CyberNest, we take your privacy seriously. We collect only the information necessary to provide and improve our services. We do not sell your personal data to third parties. Your virtual machines and data are encrypted and isolated from other users.</p>
                             <ul>
                                 <li>We collect account information (name, email) to manage your subscription and provide support.</li>
@@ -1500,8 +1944,10 @@
                                 <li>Virtual machine data is encrypted at rest and in transit.</li>
                                 <li>You can request deletion of your data at any time.</li>
                             </ul>
-                            
-                            <h4 class="mt-4">Terms of Service</h4>
+                        </div>
+                        
+                        <div class="about-card">
+                            <h4 class="glow-text">Terms of Service</h4>
                             <p>By using CyberNest, you agree to our Terms of Service, which include:</p>
                             <ul>
                                 <li>Acceptable use policies prohibiting illegal activities</li>
@@ -1514,9 +1960,9 @@
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-left">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4>Key Facts</h4>
+                    <div class="team-container h-100">
+                        <div class="about-card mb-4">
+                            <h4 class="glow-text">Key Facts</h4>
                             <div class="mb-4">
                                 <h5>Founded</h5>
                                 <p>2025</p>
@@ -1538,34 +1984,32 @@
                                 <p>85+ operating systems</p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h4>Team</h4>
+                        
+                        <div class="about-card">
+                            <h4 class="glow-text">Team</h4>
                             <div class="team-member">
-                                <div class="member-avatar">
+                                <div class="member-avatar float-animation">
                                     <span>GG</span>
                                 </div>
                                 <h5>Gajanan Gavhane</h5>
                                 <p class="text-muted">CEO & Founder</p>
                             </div>
                             <div class="team-member">
-                                <div class="member-avatar">
+                                <div class="member-avatar float-animation">
                                     <span>TJ</span>
                                 </div>
                                 <h5>Tryambak Jadhav</h5>
                                 <p class="text-muted">CTO</p>
                             </div>
                             <div class="team-member">
-                                <div class="member-avatar">
+                                <div class="member-avatar float-animation">
                                     <span>YB</span>
                                 </div>
                                 <h5>Yash Botre</h5>
                                 <p class="text-muted">Lead Developer</p>
                             </div>
                             <div class="team-member">
-                                <div class="member-avatar">
+                                <div class="member-avatar float-animation">
                                     <span>VG</span>
                                 </div>
                                 <h5>Viraj Gaikwad</h5>
@@ -1610,7 +2054,7 @@
                         <li class="mb-2"><a href="#about">Privacy</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 footer-newsletter">
                     <h5 class="mb-3">Subscribe to our Newsletter</h5>
                     <p class="text-muted mb-3">Get the latest news and updates from CyberNest.</p>
                     <div class="input-group">
@@ -1631,6 +2075,32 @@
             </div>
         </div>
     </footer>
+
+    <!-- OS Boot Animation -->
+    <div id="bootAnimation" class="boot-animation" style="display: none;">
+        <div class="boot-logo" id="bootLogo"></div>
+        <div class="boot-progress">
+            <div class="boot-progress-bar"></div>
+        </div>
+        <p class="text-white mt-3" id="bootMessage">Booting OS...</p>
+    </div>
+
+    <!-- Fullscreen OS View -->
+    <div id="osFullscreen" class="os-fullscreen">
+        <div class="os-header">
+            <h5 class="text-white mb-0" id="fullscreenOSTitle">Windows 11</h5>
+            <button class="btn btn-sm btn-outline-light" id="exitFullscreen">
+                <i class="bi bi-fullscreen-exit"></i> Exit Fullscreen
+            </button>
+        </div>
+        <div class="os-content">
+            <div class="text-center text-white" id="osDesktop">
+                <i class="bi bi-windows display-1 mb-3"></i>
+                <h3>Windows 11 Desktop</h3>
+                <p>Your virtual machine is now running in fullscreen mode</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
@@ -1821,93 +2291,6 @@
                 });
             }
             
-            // VM Launch functionality
-            const vmLaunchForm = document.getElementById('vmLaunchForm');
-            const storageSize = document.getElementById('storageSize');
-            const storageValue = document.getElementById('storageValue');
-            const launchSummary = document.getElementById('launchSummary');
-            const launchProgress = document.getElementById('launchProgress');
-            const launchVMButton = document.getElementById('launchVMButton');
-            
-            if (storageSize && storageValue) {
-                storageSize.addEventListener('input', function() {
-                    storageValue.textContent = this.value + ' GB';
-                    updateLaunchSummary();
-                });
-            }
-            
-            function updateLaunchSummary() {
-                if (!vmLaunchForm) return;
-                
-                const formData = new FormData(vmLaunchForm);
-                const osSelect = document.getElementById('osSelect');
-                const vmSize = document.getElementById('vmSize');
-                
-                if (osSelect.value && vmSize.value) {
-                    const osText = osSelect.options[osSelect.selectedIndex].text;
-                    const sizeText = vmSize.options[vmSize.selectedIndex].text;
-                    const storageText = storageSize.value + ' GB';
-                    
-                    launchSummary.innerHTML = `
-                        <h6>Configuration Summary</h6>
-                        <ul class="list-unstyled small">
-                            <li><strong>OS:</strong> ${osText}</li>
-                            <li><strong>Size:</strong> ${sizeText}</li>
-                            <li><strong>Storage:</strong> ${storageText}</li>
-                        </ul>
-                    `;
-                }
-            }
-            
-            // Initialize launch summary
-            updateLaunchSummary();
-            
-            if (vmLaunchForm) {
-                vmLaunchForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Show progress
-                    launchProgress.style.display = 'block';
-                    launchVMButton.disabled = true;
-                    
-                    // Simulate VM launch progress
-                    let progress = 0;
-                    const progressBar = document.querySelector('#launchProgress .progress-bar');
-                    const progressText = document.getElementById('progressText');
-                    
-                    const progressInterval = setInterval(() => {
-                        progress += Math.random() * 10;
-                        if (progress > 100) progress = 100;
-                        
-                        progressBar.style.width = progress + '%';
-                        
-                        if (progress < 30) {
-                            progressText.textContent = 'Allocating resources...';
-                        } else if (progress < 60) {
-                            progressText.textContent = 'Installing operating system...';
-                        } else if (progress < 90) {
-                            progressText.textContent = 'Configuring network...';
-                        } else {
-                            progressText.textContent = 'Finalizing setup...';
-                        }
-                        
-                        if (progress >= 100) {
-                            clearInterval(progressInterval);
-                            setTimeout(() => {
-                                showToast('Virtual machine launched successfully!', 'success');
-                                document.getElementById('launchModal').querySelector('.btn-close').click();
-                                // Reset form
-                                setTimeout(() => {
-                                    launchProgress.style.display = 'none';
-                                    launchVMButton.disabled = false;
-                                    progressBar.style.width = '0%';
-                                }, 1000);
-                            }, 1000);
-                        }
-                    }, 500);
-                });
-            }
-            
             // App installation
             const installButtons = document.querySelectorAll('.install-app');
             installButtons.forEach(button => {
@@ -1964,6 +2347,449 @@
                     toast.remove();
                 });
             }
+            
+            // Typewriter effect for hero section
+            function initTypewriter() {
+                const typewriterText = document.getElementById('typewriter-text');
+                const text = "Run Any OS, Anywhere — Instantly in Your Browser";
+                let index = 0;
+                
+                function type() {
+                    if (index < text.length) {
+                        typewriterText.innerHTML += text.charAt(index);
+                        index++;
+                        setTimeout(type, 100);
+                    }
+                }
+                
+                // Start typing after a short delay
+                setTimeout(type, 500);
+            }
+            
+            initTypewriter();
+            
+            // OS Launch with configuration and boot sequence
+            const osLaunchButtons = document.querySelectorAll('.launch-os');
+            let currentOS = '';
+            let currentOSName = '';
+            
+            osLaunchButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentOS = this.getAttribute('data-os');
+                    currentOSName = this.getAttribute('data-os-name');
+                    
+                    // Show configuration modal
+                    const configModal = new bootstrap.Modal(document.getElementById('osConfigModal'));
+                    document.getElementById('osConfigTitle').textContent = `Configure ${currentOSName}`;
+                    document.getElementById('vmName').value = `${currentOSName} VM`;
+                    configModal.show();
+                });
+            });
+            
+            // OS Configuration modal handling
+            const nextStepBtn = document.getElementById('nextStep');
+            const cancelConfigBtn = document.getElementById('cancelConfig');
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            
+            nextStepBtn.addEventListener('click', function() {
+                if (step1.classList.contains('active')) {
+                    // Move to step 2 (launch progress)
+                    step1.classList.remove('active');
+                    step2.classList.add('active');
+                    nextStepBtn.disabled = true;
+                    cancelConfigBtn.disabled = true;
+                    
+                    // Start launch sequence
+                    startOSLaunch();
+                }
+            });
+            
+            cancelConfigBtn.addEventListener('click', function() {
+                // Reset modal state
+                step1.classList.add('active');
+                step2.classList.remove('active');
+                nextStepBtn.disabled = false;
+                nextStepBtn.textContent = 'Launch Virtual Machine';
+            });
+            
+            function startOSLaunch() {
+                const progressBar = document.getElementById('launchProgressBar');
+                const launchStatus = document.getElementById('launchStatus');
+                let progress = 0;
+                
+                const steps = [
+                    "Initializing Virtual Machine...",
+                    "Loading System Files...",
+                    "Booting OS...",
+                    "Starting Interface...",
+                    "Finalizing Setup..."
+                ];
+                
+                let currentStep = 0;
+                
+                const progressInterval = setInterval(() => {
+                    progress += 2;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    if (progress >= 20 && currentStep === 0) {
+                        launchStatus.textContent = steps[0];
+                        currentStep++;
+                    } else if (progress >= 40 && currentStep === 1) {
+                        launchStatus.textContent = steps[1];
+                        currentStep++;
+                    } else if (progress >= 60 && currentStep === 2) {
+                        launchStatus.textContent = steps[2];
+                        currentStep++;
+                    } else if (progress >= 80 && currentStep === 3) {
+                        launchStatus.textContent = steps[3];
+                        currentStep++;
+                    } else if (progress >= 95 && currentStep === 4) {
+                        launchStatus.textContent = steps[4];
+                        currentStep++;
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        // Close configuration modal
+                        setTimeout(() => {
+                            bootstrap.Modal.getInstance(document.getElementById('osConfigModal')).hide();
+                            
+                            // Show boot animation
+                            showBootAnimation(currentOS, currentOSName);
+                        }, 1000);
+                    }
+                }, 100);
+            }
+            
+            function showBootAnimation(os, osName) {
+                const bootAnimation = document.getElementById('bootAnimation');
+                const bootLogo = document.getElementById('bootLogo');
+                const bootMessage = document.getElementById('bootMessage');
+                
+                // Set OS-specific logo and message
+                let logoHTML = '';
+                
+                switch(os) {
+                    case 'windows11':
+                        logoHTML = '<i class="bi bi-windows display-1 text-primary"></i>';
+                        break;
+                    case 'ubuntu':
+                        logoHTML = '<i class="bi bi-ubuntu display-1 text-warning"></i>';
+                        break;
+                    case 'macos':
+                        logoHTML = '<i class="bi bi-apple display-1 text-secondary"></i>';
+                        break;
+                    default:
+                        logoHTML = '<i class="bi bi-laptop display-1 text-primary"></i>';
+                }
+                
+                bootLogo.innerHTML = logoHTML;
+                bootMessage.textContent = `Booting ${osName}...`;
+                
+                // Show boot animation
+                bootAnimation.style.display = 'flex';
+                
+                // Hide boot animation after 5 seconds and show fullscreen OS
+                setTimeout(() => {
+                    bootAnimation.style.display = 'none';
+                    showFullscreenOS(os, osName);
+                    
+                    // Update VM preview on home page
+                    updateVMPreview(os, osName);
+                    
+                    // Update VM View section
+                    updateVMView(os, osName);
+                }, 5000);
+            }
+            
+            function showFullscreenOS(os, osName) {
+                const fullscreenOS = document.getElementById('osFullscreen');
+                const fullscreenTitle = document.getElementById('fullscreenOSTitle');
+                const osDesktop = document.getElementById('osDesktop');
+                
+                fullscreenTitle.textContent = osName;
+                
+                // Set OS-specific desktop
+                let desktopHTML = '';
+                
+                switch(os) {
+                    case 'windows11':
+                        desktopHTML = `
+                            <i class="bi bi-windows display-1 text-primary mb-3"></i>
+                            <h3>Windows 11 Desktop</h3>
+                            <p>Your virtual machine is now running in fullscreen mode</p>
+                        `;
+                        break;
+                    case 'ubuntu':
+                        desktopHTML = `
+                            <i class="bi bi-ubuntu display-1 text-warning mb-3"></i>
+                            <h3>Ubuntu 22.04 Desktop</h3>
+                            <p>Your virtual machine is now running in fullscreen mode</p>
+                        `;
+                        break;
+                    case 'macos':
+                        desktopHTML = `
+                            <i class="bi bi-apple display-1 text-secondary mb-3"></i>
+                            <h3>macOS Monterey Desktop</h3>
+                            <p>Your virtual machine is now running in fullscreen mode</p>
+                        `;
+                        break;
+                    default:
+                        desktopHTML = `
+                            <i class="bi bi-laptop display-1 text-primary mb-3"></i>
+                            <h3>${osName} Desktop</h3>
+                            <p>Your virtual machine is now running in fullscreen mode</p>
+                        `;
+                }
+                
+                osDesktop.innerHTML = desktopHTML;
+                fullscreenOS.style.display = 'block';
+            }
+            
+            function updateVMPreview(os, osName) {
+                const vmPreview = document.getElementById('vm-preview');
+                let previewHTML = '';
+                
+                switch(os) {
+                    case 'windows11':
+                        previewHTML = `
+                            <i class="bi bi-windows display-1 text-primary"></i>
+                            <p class="text-primary">${osName} Preview</p>
+                            <p class="small text-muted">Ready to use</p>
+                        `;
+                        break;
+                    case 'ubuntu':
+                        previewHTML = `
+                            <i class="bi bi-ubuntu display-1 text-warning"></i>
+                            <p class="text-warning">${osName} Preview</p>
+                            <p class="small text-muted">Ready to use</p>
+                        `;
+                        break;
+                    case 'macos':
+                        previewHTML = `
+                            <i class="bi bi-apple display-1 text-secondary"></i>
+                            <p class="text-secondary">${osName} Preview</p>
+                            <p class="small text-muted">Ready to use</p>
+                        `;
+                        break;
+                    default:
+                        previewHTML = `
+                            <i class="bi bi-laptop display-1 text-primary"></i>
+                            <p class="text-primary">${osName} Preview</p>
+                            <p class="small text-muted">Ready to use</p>
+                        `;
+                }
+                
+                vmPreview.innerHTML = previewHTML;
+            }
+            
+            function updateVMView(os, osName) {
+                // Update VM title
+                document.getElementById('vm-title').textContent = `${osName} - Development VM`;
+                
+                // Update VM information
+                document.getElementById('vmOS').textContent = osName;
+                
+                // Get configuration values
+                const ramSize = document.getElementById('ramSize').value;
+                const storageSize = document.getElementById('storageSize').value;
+                const cpuCores = document.getElementById('cpuCores').value;
+                
+                // Update VM specs
+                document.getElementById('vmRAM').textContent = `${ramSize} GB`;
+                document.getElementById('vmStorage').textContent = `${storageSize} GB`;
+                document.getElementById('vmCPUs').textContent = cpuCores;
+                
+                // Update VM display
+                const vmContent = document.getElementById('vmContent');
+                let vmHTML = '';
+                
+                switch(os) {
+                    case 'windows11':
+                        vmHTML = `
+                            <i class="bi bi-windows display-1 text-primary"></i>
+                            <p class="text-primary">Virtual Machine Screen - ${osName} Desktop</p>
+                            <p class="small text-muted">VM is running with ${cpuCores} vCPUs and ${ramSize}GB RAM</p>
+                        `;
+                        break;
+                    case 'ubuntu':
+                        vmHTML = `
+                            <i class="bi bi-ubuntu display-1 text-warning"></i>
+                            <p class="text-warning">Virtual Machine Screen - ${osName} Desktop</p>
+                            <p class="small text-muted">VM is running with ${cpuCores} vCPUs and ${ramSize}GB RAM</p>
+                        `;
+                        break;
+                    case 'macos':
+                        vmHTML = `
+                            <i class="bi bi-apple display-1 text-secondary"></i>
+                            <p class="text-secondary">Virtual Machine Screen - ${osName} Desktop</p>
+                            <p class="small text-muted">VM is running with ${cpuCores} vCPUs and ${ramSize}GB RAM</p>
+                        `;
+                        break;
+                    default:
+                        vmHTML = `
+                            <i class="bi bi-laptop display-1 text-primary"></i>
+                            <p class="text-primary">Virtual Machine Screen - ${osName} Desktop</p>
+                            <p class="small text-muted">VM is running with ${cpuCores} vCPUs and ${ramSize}GB RAM</p>
+                        `;
+                }
+                
+                vmContent.innerHTML = vmHTML;
+            }
+            
+            // Exit fullscreen OS view
+            document.getElementById('exitFullscreen').addEventListener('click', function() {
+                document.getElementById('osFullscreen').style.display = 'none';
+            });
+            
+            // VM Power Controls
+            const powerOffBtn = document.getElementById('powerOffBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const vmStatus = document.getElementById('vmStatus');
+            const vmDisplay = document.getElementById('vmDisplay');
+            
+            powerOffBtn.addEventListener('click', function() {
+                // Show shutdown animation
+                vmDisplay.innerHTML = `
+                    <div class="text-center text-white py-5">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Shutting down...</p>
+                    </div>
+                `;
+                
+                // Update status
+                vmStatus.textContent = 'Shutting Down';
+                vmStatus.className = 'badge bg-warning';
+                
+                // Disable buttons during shutdown
+                powerOffBtn.disabled = true;
+                restartBtn.disabled = true;
+                
+                // Complete shutdown after delay
+                setTimeout(() => {
+                    vmDisplay.innerHTML = `
+                        <div class="text-center text-muted py-5">
+                            <i class="bi bi-power display-1"></i>
+                            <p>Virtual Machine is Powered Off</p>
+                        </div>
+                    `;
+                    
+                    // Update status
+                    vmStatus.textContent = 'Powered Off';
+                    vmStatus.className = 'badge bg-secondary';
+                    
+                    // Re-enable power button
+                    powerOffBtn.disabled = false;
+                    powerOffBtn.innerHTML = '<i class="bi bi-power"></i> Power On';
+                    
+                    // Change power off button to power on
+                    powerOffBtn.removeEventListener('click', arguments.callee);
+                    powerOffBtn.addEventListener('click', powerOnVM);
+                }, 3000);
+            });
+            
+            function powerOnVM() {
+                // Show boot animation
+                vmDisplay.innerHTML = `
+                    <div class="text-center text-white py-5">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Booting OS...</p>
+                    </div>
+                `;
+                
+                // Update status
+                vmStatus.textContent = 'Booting';
+                vmStatus.className = 'badge bg-warning';
+                
+                // Disable buttons during boot
+                powerOffBtn.disabled = true;
+                restartBtn.disabled = true;
+                
+                // Complete boot after delay
+                setTimeout(() => {
+                    // Restore VM display
+                    const os = currentOS || 'windows11';
+                    const osName = currentOSName || 'Windows 11';
+                    updateVMView(os, osName);
+                    
+                    // Update status
+                    vmStatus.textContent = 'Running';
+                    vmStatus.className = 'badge bg-success';
+                    
+                    // Re-enable buttons
+                    powerOffBtn.disabled = false;
+                    restartBtn.disabled = false;
+                    powerOffBtn.innerHTML = '<i class="bi bi-power"></i> Power Off';
+                    
+                    // Change power on button back to power off
+                    powerOffBtn.removeEventListener('click', powerOnVM);
+                    powerOffBtn.addEventListener('click', arguments.callee);
+                }, 3000);
+            }
+            
+            restartBtn.addEventListener('click', function() {
+                // Show restart animation
+                vmDisplay.innerHTML = `
+                    <div class="text-center text-white py-5">
+                        <div class="spinner-border text-primary mb-3" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p>Restarting...</p>
+                    </div>
+                `;
+                
+                // Update status
+                vmStatus.textContent = 'Restarting';
+                vmStatus.className = 'badge bg-warning';
+                
+                // Disable buttons during restart
+                powerOffBtn.disabled = true;
+                restartBtn.disabled = true;
+                
+                // Complete restart after delay
+                setTimeout(() => {
+                    // Restore VM display
+                    const os = currentOS || 'windows11';
+                    const osName = currentOSName || 'Windows 11';
+                    updateVMView(os, osName);
+                    
+                    // Update status
+                    vmStatus.textContent = 'Running';
+                    vmStatus.className = 'badge bg-success';
+                    
+                    // Re-enable buttons
+                    powerOffBtn.disabled = false;
+                    restartBtn.disabled = false;
+                }, 3000);
+            });
+            
+            // 3D card effects on mouse move
+            const cards3d = document.querySelectorAll('.card-3d');
+            cards3d.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleY = (x - centerX) / 25;
+                    const angleX = (centerY - y) / 25;
+                    
+                    this.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-5px)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+                });
+            });
         });
     </script>
 </body>
