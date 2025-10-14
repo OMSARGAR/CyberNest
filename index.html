@@ -13,8 +13,7 @@
     <!-- AOS CSS for scroll animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        /* All existing CSS remains the same, except for the following additions/fixes */
-         :root {
+        :root {
             --primary: #00C2FF;
             --secondary: #9B5CFF;
             --dark: #121212;
@@ -1521,6 +1520,89 @@
         .os-home-app-label {
             font-size: 0.8rem;
         }
+
+        /* NEW: Import OS Modal Styles */
+        .import-os-modal .modal-dialog {
+            max-width: 600px;
+        }
+
+        .import-step {
+            display: none;
+        }
+
+        .import-step.active {
+            display: block;
+        }
+
+        .import-progress {
+            height: 10px;
+            margin: 20px 0;
+        }
+
+        .import-status {
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(0, 194, 255, 0.5);
+            border-radius: 10px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 194, 255, 0.05);
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(0, 194, 255, 0.1);
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary);
+            background-color: rgba(0, 194, 255, 0.15);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .file-info {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* NEW: Custom OS Home Page */
+        .custom-os-home {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        .custom-os-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .os-specs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .os-spec-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100">
@@ -1658,6 +1740,90 @@
                             <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></p>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Import OS Modal -->
+    <div class="modal fade import-os-modal" id="importOSModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Import Custom OS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="importOSForm">
+                        <div class="import-step active" id="import-step1">
+                            <h6>Step 1: Upload OS Image</h6>
+                            <p class="text-muted mb-4">Select an OS image file (ISO, IMG, or other supported formats) to import into CyberNest.</p>
+                            
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="file-upload-icon">
+                                    <i class="bi bi-cloud-arrow-up"></i>
+                                </div>
+                                <h5>Drag & Drop OS Image</h5>
+                                <p class="text-muted">or click to browse files</p>
+                                <input type="file" id="osFileInput" accept=".iso,.img,.vmdk,.qcow2" hidden>
+                                <button type="button" class="btn btn-outline-primary mt-2" id="browseFilesBtn">Browse Files</button>
+                            </div>
+                            
+                            <div class="file-info" id="fileInfo">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong id="fileName">File Name</strong>
+                                        <div class="text-muted small" id="fileSize">File Size</div>
+                                    </div>
+                                    <button type="button" class="btn-close" id="removeFileBtn"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-3">
+                                <label for="osName" class="form-label">OS Name</label>
+                                <input type="text" class="form-control" id="osName" placeholder="Give your OS a name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="import-step" id="import-step2">
+                            <h6>Step 2: Processing OS Image</h6>
+                            <p class="text-muted mb-4">Your OS image is being processed and compressed for optimal performance.</p>
+                            
+                            <div class="progress import-progress">
+                                <div class="progress-bar" id="importProgressBar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            
+                            <div class="import-status text-center" id="importStatus">
+                                Initializing...
+                            </div>
+                        </div>
+                        
+                        <div class="import-step" id="import-step3">
+                            <h6>Step 3: Ready to Boot</h6>
+                            <div class="text-center py-4">
+                                <i class="bi bi-check-circle text-success display-4 mb-3"></i>
+                                <p>Your OS has been successfully imported and is ready to boot!</p>
+                                <div class="os-specs">
+                                    <div class="os-spec-item">
+                                        <small>OS Name</small>
+                                        <div id="finalOSName">-</div>
+                                    </div>
+                                    <div class="os-spec-item">
+                                        <small>File Size</small>
+                                        <div id="finalFileSize">-</div>
+                                    </div>
+                                    <div class="os-spec-item">
+                                        <small>Compressed Size</small>
+                                        <div id="compressedSize">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelImportBtn">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="nextImportStep" disabled>Next</button>
                 </div>
             </div>
         </div>
@@ -1845,6 +2011,17 @@
                             <h5>macOS Monterey</h5>
                             <p class="text-muted">Apple's latest OS for creative work</p>
                             <button class="btn btn-outline-primary mt-2 launch-os" data-os="macos" data-os-name="macOS Monterey">Launch</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- NEW: Import Custom OS Card -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card card-3d gradient-border">
+                        <div class="card-body text-center">
+                            <i class="bi bi-cloud-arrow-up display-4 text-info mb-3 floating"></i>
+                            <h5>Import Custom OS</h5>
+                            <p class="text-muted">Upload and run your own operating system</p>
+                            <button class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#importOSModal">Import OS</button>
                         </div>
                     </div>
                 </div>
@@ -2597,6 +2774,41 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- NEW: Custom OS Home Page -->
+            <div id="customOSHome" class="os-home-page custom-os-home">
+                <div class="os-home-icon">
+                    <i class="bi bi-laptop"></i>
+                </div>
+                <h2 id="customOSHomeTitle">Custom OS</h2>
+                <p>Welcome to your imported operating system</p>
+                <div class="os-home-apps">
+                    <div class="os-home-app">
+                        <div class="os-home-app-icon">
+                            <i class="bi bi-browser-chrome"></i>
+                        </div>
+                        <span class="os-home-app-label">Browser</span>
+                    </div>
+                    <div class="os-home-app">
+                        <div class="os-home-app-icon">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <span class="os-home-app-label">Files</span>
+                    </div>
+                    <div class="os-home-app">
+                        <div class="os-home-app-icon">
+                            <i class="bi bi-folder"></i>
+                        </div>
+                        <span class="os-home-app-label">File Manager</span>
+                    </div>
+                    <div class="os-home-app">
+                        <div class="os-home-app-icon">
+                            <i class="bi bi-gear"></i>
+                        </div>
+                        <span class="os-home-app-label">Settings</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3095,7 +3307,9 @@
                         document.getElementById('macosHome').classList.add('active');
                         break;
                     default:
-                        document.getElementById('windowsHome').classList.add('active');
+                        // For custom OS, show the custom OS home page
+                        document.getElementById('customOSHome').classList.add('active');
+                        document.getElementById('customOSHomeTitle').textContent = osName;
                 }
                 
                 fullscreenOS.style.display = 'block';
@@ -3322,7 +3536,250 @@
                 }, 3000);
             });
             
-            // NEW: ISO Download with lock and message
+            // NEW: Import OS Functionality
+            const importOSModal = new bootstrap.Modal(document.getElementById('importOSModal'));
+            const fileUploadArea = document.getElementById('fileUploadArea');
+            const osFileInput = document.getElementById('osFileInput');
+            const browseFilesBtn = document.getElementById('browseFilesBtn');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const removeFileBtn = document.getElementById('removeFileBtn');
+            const osNameInput = document.getElementById('osName');
+            const nextImportStep = document.getElementById('nextImportStep');
+            const cancelImportBtn = document.getElementById('cancelImportBtn');
+            const importProgressBar = document.getElementById('importProgressBar');
+            const importStatus = document.getElementById('importStatus');
+            const finalOSName = document.getElementById('finalOSName');
+            const finalFileSize = document.getElementById('finalFileSize');
+            const compressedSize = document.getElementById('compressedSize');
+            
+            let selectedFile = null;
+            
+            // File upload area click handler
+            fileUploadArea.addEventListener('click', function() {
+                osFileInput.click();
+            });
+            
+            // Browse files button
+            browseFilesBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                osFileInput.click();
+            });
+            
+            // File input change handler
+            osFileInput.addEventListener('change', function(e) {
+                if (this.files.length > 0) {
+                    handleFileSelection(this.files[0]);
+                }
+            });
+            
+            // Drag and drop functionality
+            fileUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', function() {
+                this.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileSelection(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // Remove file button
+            removeFileBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                resetFileSelection();
+            });
+            
+            // OS name input validation
+            osNameInput.addEventListener('input', function() {
+                validateImportForm();
+            });
+            
+            // Next step button in import modal
+            nextImportStep.addEventListener('click', function() {
+                const currentStep = getCurrentImportStep();
+                
+                if (currentStep === 1) {
+                    // Move to step 2 (processing)
+                    showImportStep(2);
+                    processOSImage();
+                } else if (currentStep === 2) {
+                    // Move to step 3 (ready to boot)
+                    showImportStep(3);
+                    nextImportStep.textContent = 'Boot OS';
+                } else if (currentStep === 3) {
+                    // Boot the imported OS
+                    bootImportedOS();
+                }
+            });
+            
+            // Cancel import button
+            cancelImportBtn.addEventListener('click', function() {
+                resetImportModal();
+            });
+            
+            // Import modal hidden event
+            document.getElementById('importOSModal').addEventListener('hidden.bs.modal', function() {
+                resetImportModal();
+            });
+            
+            function handleFileSelection(file) {
+                // Validate file type
+                const validExtensions = ['.iso', '.img', '.vmdk', '.qcow2'];
+                const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+                
+                if (!validExtensions.includes(fileExtension)) {
+                    showToast('Please select a valid OS image file (ISO, IMG, VMDK, QCOW2)', 'error');
+                    return;
+                }
+                
+                selectedFile = file;
+                
+                // Update file info display
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                fileInfo.style.display = 'block';
+                
+                // Auto-fill OS name if empty
+                if (!osNameInput.value) {
+                    osNameInput.value = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
+                }
+                
+                validateImportForm();
+            }
+            
+            function resetFileSelection() {
+                selectedFile = null;
+                osFileInput.value = '';
+                fileInfo.style.display = 'none';
+                validateImportForm();
+            }
+            
+            function validateImportForm() {
+                if (selectedFile && osNameInput.value.trim() !== '') {
+                    nextImportStep.disabled = false;
+                } else {
+                    nextImportStep.disabled = true;
+                }
+            }
+            
+            function getCurrentImportStep() {
+                if (document.getElementById('import-step1').classList.contains('active')) return 1;
+                if (document.getElementById('import-step2').classList.contains('active')) return 2;
+                if (document.getElementById('import-step3').classList.contains('active')) return 3;
+                return 1;
+            }
+            
+            function showImportStep(step) {
+                // Hide all steps
+                document.querySelectorAll('.import-step').forEach(stepEl => {
+                    stepEl.classList.remove('active');
+                });
+                
+                // Show the specified step
+                document.getElementById(`import-step${step}`).classList.add('active');
+                
+                // Update button text
+                if (step === 1) {
+                    nextImportStep.textContent = 'Next';
+                    nextImportStep.disabled = true;
+                } else if (step === 2) {
+                    nextImportStep.textContent = 'Processing...';
+                    nextImportStep.disabled = true;
+                } else if (step === 3) {
+                    nextImportStep.textContent = 'Boot OS';
+                    nextImportStep.disabled = false;
+                }
+            }
+            
+            function processOSImage() {
+                let progress = 0;
+                
+                const progressInterval = setInterval(() => {
+                    progress += 2;
+                    importProgressBar.style.width = `${progress}%`;
+                    
+                    if (progress <= 30) {
+                        importStatus.textContent = 'Validating file format...';
+                    } else if (progress <= 60) {
+                        importStatus.textContent = 'Compressing OS image...';
+                    } else if (progress <= 90) {
+                        importStatus.textContent = 'Optimizing for virtualization...';
+                    } else {
+                        importStatus.textContent = 'Finalizing setup...';
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        // Calculate compressed size (simulate 40-60% compression)
+                        const originalSize = selectedFile.size;
+                        const compressionRatio = 0.4 + Math.random() * 0.2; // 40-60% compression
+                        const compressedFileSize = Math.round(originalSize * compressionRatio);
+                        
+                        // Update final display
+                        finalOSName.textContent = osNameInput.value;
+                        finalFileSize.textContent = formatFileSize(originalSize);
+                        compressedSize.textContent = formatFileSize(compressedFileSize);
+                        
+                        // Enable next button
+                        setTimeout(() => {
+                            nextImportStep.disabled = false;
+                            nextImportStep.textContent = 'Next';
+                        }, 500);
+                    }
+                }, 50);
+            }
+            
+            function bootImportedOS() {
+                // Close import modal
+                importOSModal.hide();
+                
+                // Set current OS to custom
+                currentOS = 'custom';
+                currentOSName = osNameInput.value;
+                
+                // Show boot animation
+                showBootAnimation('custom', currentOSName);
+                
+                // Show success message
+                showToast(`${currentOSName} has been successfully imported and is now booting!`, 'success');
+            }
+            
+            function resetImportModal() {
+                // Reset to step 1
+                showImportStep(1);
+                
+                // Clear file selection
+                resetFileSelection();
+                
+                // Clear form inputs
+                osNameInput.value = '';
+                
+                // Reset progress bar
+                importProgressBar.style.width = '0%';
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+            
+            // ISO Download with lock and message
             const viewIsoButtons = document.querySelectorAll('.view-iso');
             const isoModal = new bootstrap.Modal(document.getElementById('isoModal'));
             const isoModalTitle = document.getElementById('isoModalTitle');
@@ -3417,7 +3874,7 @@
                 });
             });
             
-            // NEW: Download lock function
+            // Download lock function
             function showDownloadLock(fileName) {
                 const downloadLockOverlay = document.getElementById('downloadLockOverlay');
                 downloadLockOverlay.style.display = 'flex';
