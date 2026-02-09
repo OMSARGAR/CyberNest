@@ -254,7 +254,7 @@
             if (signupForm) {
                 signupForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    showToast('Account created successfully! Welcome to ExecHub.', 'success');
+                    showToast('Account created successfully! Welcome to CyberNest.', 'success');
                     setTimeout(() => {
                         document.getElementById('signupModal').querySelector('.btn-close').click();
                     }, 1500);
@@ -521,38 +521,38 @@
             function createTerminalAnimation() {
                 const terminalLines = document.getElementById('terminalLines');
                 const lines = [
-                    { text: 'root@exechub:~# systemctl start virtualization', type: 'user' },
+                    { text: 'root@cybernest:~# systemctl start virtualization', type: 'user' },
                     { text: 'Starting virtualization service...', type: 'process' },
                     { text: '✓ Virtualization service started successfully', type: 'success' },
-                    { text: 'root@exechub:~# vm-manager --list', type: 'user' },
+                    { text: 'root@cybernest:~# vm-manager --list', type: 'user' },
                     { text: 'Available Virtual Machines:', type: 'output' },
                     { text: '  • Windows 11 Pro (Running)', type: 'directory' },
                     { text: '  • Ubuntu 22.04 LTS (Running)', type: 'directory' },
                     { text: '  • macOS Monterey (Stopped)', type: 'directory' },
                     { text: '  • Aurora OS (Ready)', type: 'info' },
-                    { text: 'root@exechub:~# vm-stats --all', type: 'user' },
+                    { text: 'root@cybernest:~# vm-stats --all', type: 'user' },
                     { text: 'System Resources:', type: 'output' },
                     { text: '  CPU Usage: 18%', type: 'output' },
                     { text: '  Memory: 4.2GB / 16GB', type: 'output' },
                     { text: '  Storage: 56GB / 128GB', type: 'output' },
                     { text: '  Network: 124MB transferred', type: 'output' },
-                    { text: 'root@exechub:~# security-check --full', type: 'user' },
+                    { text: 'root@cybernest:~# security-check --full', type: 'user' },
                     { text: 'Running security audit...', type: 'process' },
                     { text: '✓ All systems secure', type: 'success' },
                     { text: '✓ Firewall active', type: 'success' },
                     { text: '✓ Encryption enabled', type: 'success' },
-                    { text: 'root@exechub:~# update-system', type: 'user' },
+                    { text: 'root@cybernest:~# update-system', type: 'user' },
                     { text: 'Checking for updates...', type: 'process' },
                     { text: 'System is up to date', type: 'success' },
-                    { text: 'root@exechub:~# network-test --global', type: 'user' },
+                    { text: 'root@cybernest:~# network-test --global', type: 'user' },
                     { text: 'Testing global connectivity...', type: 'process' },
                     { text: '✓ US-East: 24ms', type: 'success' },
                     { text: '✓ EU-West: 42ms', type: 'success' },
                     { text: '✓ Asia-Pacific: 86ms', type: 'success' },
-                    { text: 'root@exechub:~# vm-create --name "Aurora-OS" --type custom', type: 'user' },
+                    { text: 'root@cybernest:~# vm-create --name "Aurora-OS" --type custom', type: 'user' },
                     { text: 'Creating Aurora OS virtual machine...', type: 'process' },
                     { text: '✓ Aurora OS ready for launch', type: 'success' },
-                    { text: 'root@exechub:~# ', type: 'user' },
+                    { text: 'root@cybernest:~# ', type: 'user' },
                 ];
                 
                 // Create terminal lines
@@ -575,7 +575,7 @@
             function updateTerminalAnimation(osName) {
                 const terminalLines = document.getElementById('terminalLines');
                 const newLines = [
-                    { text: `root@exechub:~# vm-launch --os "${osName}"`, type: 'user' },
+                    { text: `root@cybernest:~# vm-launch --os "${osName}"`, type: 'user' },
                     { text: `Launching ${osName} virtual machine...`, type: 'process' },
                     { text: 'Allocating resources...', type: 'process' },
                     { text: 'Loading system image...', type: 'process' },
@@ -583,8 +583,8 @@
                     { text: 'Starting virtual machine...', type: 'process' },
                     { text: `✓ ${osName} launched successfully`, type: 'success' },
                     { text: 'Virtual Machine is now ready for use', type: 'output' },
-                    { text: 'Access: https://exechub.app/vm/' + osName.toLowerCase().replace(/\s+/g, '-'), type: 'info' },
-                    { text: 'root@exechub:~# ', type: 'user' },
+                    { text: 'Access: https://cybernest.app/vm/' + osName.toLowerCase().replace(/\s+/g, '-'), type: 'info' },
+                    { text: 'root@cybernest:~# ', type: 'user' },
                 ];
                 
                 // Clear existing lines
